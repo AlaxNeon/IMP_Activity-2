@@ -1,19 +1,24 @@
 import cv2
 import numpy as np
 
+# Read image
 img = cv2.imread("image.png", cv2.IMREAD_GRAYSCALE)
 
-# Global Threshold Formula:
-# g(x,y) = 1 if f(x,y) >= T else 0
+rows, cols = img.shape
+
+# Threshold value
 T = 170
 
-thresholded = np.zeros_like(img)
+# Output binary image
+binary = np.zeros_like(img)
 
-for i in range(img.shape[0]):
-    for j in range(img.shape[1]):
+# Manual thresholding
+for i in range(rows):
+    for j in range(cols):
         if img[i, j] >= T:
-            thresholded[i, j] = 255
+            binary[i, j] = 255
         else:
-            thresholded[i, j] = 0
+            binary[i, j] = 0
 
-cv2.imwrite("global_threshold.png", thresholded)
+# Save output
+cv2.imwrite("global_threshold.png", binary)
